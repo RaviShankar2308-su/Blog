@@ -5,12 +5,11 @@
 # return the newly created session token
 class SessionsController < ApplicationController
   def new
-    @user = params[:email] ? User.find_by(email: params[:email]) : User.find_by(username: params[:username])
+    @user = params[:email].present? ? User.find_by(email: params[:email]) : User.find_by(username: params[:username])
   end
 
   def create
-    @user = params[:email] ? User.find_by(email: params[:email]) : User.find_by(username: params[:username])
-
+    @user = params[:email].present? ? User.find_by(email: params[:email]) : User.find_by(username: params[:username])
     if @user.password == params[:password]
       session[:user_id] = @user.id
       redirect_to root_path, notice: 'Successfully logged in!'
