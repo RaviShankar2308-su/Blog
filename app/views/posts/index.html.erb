@@ -1,0 +1,19 @@
+<h1>Your Posts</h1>
+
+<% if @posts.any? %>
+  <ul id = "holder">
+    <% @posts.each do |post| %>
+      <li>
+        <strong><%= post.title %></strong><br>
+        <%= post.content %>
+      </li>
+    <% end %>
+  </ul>
+
+<% else %>
+  <p>No posts yet.</p>
+<% end %>
+
+<%= button_to 'New Post', new_post_path %>
+<br>
+<%= button_to 'Logout', logout_path, method: :delete, turbo_link: :true%>
